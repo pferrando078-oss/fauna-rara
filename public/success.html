@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paiement réussi — Fauna Rara</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#1a3a2a;min-height:100vh;display:flex;align-items:center;justify-content:center;color:#fff}
+.box{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:2.5rem;text-align:center;max-width:360px;width:90%}
+.icon{font-size:64px;display:block;margin-bottom:1rem}
+h1{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:.5rem}
+p{color:rgba(255,255,255,0.7);font-size:15px;line-height:1.6;margin-bottom:1.5rem}
+.amount{font-size:32px;font-weight:700;color:#d4a017;font-family:'Playfair Display',serif;display:block;margin-bottom:.5rem}
+a{display:inline-block;padding:12px 28px;background:#2d6a4f;color:#fff;border-radius:10px;font-size:14px;font-weight:500;text-decoration:none}
+a:hover{background:#52b788}
+</style>
+</head>
+<body>
+<div class="box">
+  <span class="icon">🎉</span>
+  <h1>Paiement réussi !</h1>
+  <span class="amount" id="amount">+0 FJ</span>
+  <p>Tes Frères Jean ont été crédités sur ton compte. Tu peux maintenant acheter des animaux rares !</p>
+  <a href="/">Retour à la boutique →</a>
+</div>
+<script>
+const params = new URLSearchParams(window.location.search);
+const fj = params.get('fj');
+if(fj) document.getElementById('amount').textContent = '+'+parseFloat(fj).toFixed(2)+' FJ';
+</script>
+</body>
+</html>

@@ -4,46 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fauna Rara — Collecte des animaux rares</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://js.stripe.com/v3/"></script>
 <style>
-:root {
-  --forest: #1a3a2a;
-  --moss: #2d6a4f;
-  --leaf: #52b788;
-  --gold: #d4a017;
-  --cream: #faf7f0;
-  --ink: #1a1a1a;
-  --muted: #7a7a6a;
-  --card-bg: #ffffff;
-  --border: #e8e4db;
-  --shadow: 0 2px 20px rgba(26,58,42,0.08);
-}
+:root{--forest:#1a3a2a;--moss:#2d6a4f;--leaf:#52b788;--gold:#d4a017;--cream:#faf7f0;--ink:#1a1a1a;--muted:#7a7a6a;--card-bg:#ffffff;--border:#e8e4db;--shadow:0 2px 20px rgba(26,58,42,0.08)}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh}
 a{color:inherit;text-decoration:none}
 
 /* NAV */
-nav{position:sticky;top:0;z-index:100;background:rgba(250,247,240,0.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,247,240,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px}
 .nav-brand{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--forest)}
 .nav-brand span{color:var(--gold)}
-.nav-right{display:flex;align-items:center;gap:12px}
-.wallet-pill{display:flex;align-items:center;gap:6px;background:var(--forest);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer}
-.wallet-pill .coin{font-size:15px}
+.nav-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.wallet-pill{display:flex;align-items:center;gap:6px;background:var(--forest);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;transition:background .15s}
+.wallet-pill:hover{background:var(--moss)}
 .btn-nav{padding:7px 16px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--ink);font-family:'DM Sans',sans-serif;transition:all .15s}
 .btn-nav:hover{background:var(--forest);color:#fff;border-color:var(--forest)}
 .btn-nav.primary{background:var(--moss);color:#fff;border-color:var(--moss)}
-.btn-nav.primary:hover{background:var(--forest)}
 
 /* HERO */
 .hero{background:var(--forest);color:#fff;padding:5rem 2rem 4rem;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
 .hero-tag{display:inline-block;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:4px 14px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem;color:var(--leaf)}
-.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
 .hero h1 em{color:var(--gold);font-style:normal}
-.hero p{font-size:1.1rem;color:rgba(255,255,255,0.7);max-width:500px;margin:0 auto 2rem;line-height:1.6}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,0.7);max-width:500px;margin:0 auto 2rem;line-height:1.6}
 .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn-hero{padding:14px 28px;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .2s}
 .btn-hero.primary{background:var(--gold);color:var(--forest)}
@@ -51,27 +37,21 @@ nav{position:sticky;top:0;z-index:100;background:rgba(250,247,240,0.95);backdrop
 .btn-hero.secondary{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.3)}
 .btn-hero.secondary:hover{background:rgba(255,255,255,0.2)}
 .hero-stats{display:flex;gap:2rem;justify-content:center;margin-top:3rem;flex-wrap:wrap}
-.hero-stat{text-align:center}
 .hero-stat strong{display:block;font-family:'Playfair Display',serif;font-size:2rem;font-weight:700}
 .hero-stat span{font-size:12px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.05em}
 
 /* MAIN */
 main{max-width:1100px;margin:0 auto;padding:3rem 1.5rem}
-.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.5rem}
-.section-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700}
-.section-badge{font-size:12px;color:var(--muted);background:var(--border);padding:3px 10px;border-radius:10px}
-
-/* TABS */
-.tabs{display:flex;gap:4px;background:var(--border);padding:4px;border-radius:10px;margin-bottom:2rem;width:fit-content}
-.tab{padding:8px 20px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:all .15s;color:var(--muted);border:none;background:transparent;font-family:'DM Sans',sans-serif}
+.tabs{display:flex;gap:4px;background:var(--border);padding:4px;border-radius:10px;margin-bottom:2rem;width:fit-content;flex-wrap:wrap}
+.tab{padding:8px 18px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;color:var(--muted);border:none;background:transparent;font-family:'DM Sans',sans-serif}
 .tab.active{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
 
-/* SHOP GRID */
-.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
-.animal-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.25rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+/* SHOP */
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.animal-card{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.2rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
 .animal-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(26,58,42,0.12);border-color:var(--leaf)}
 .animal-card.owned{border-color:var(--moss);background:linear-gradient(135deg,#f0faf5,#fff)}
-.card-emoji{font-size:52px;text-align:center;display:block;margin:0.5rem 0 1rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1))}
+.card-emoji{font-size:50px;text-align:center;display:block;margin:.5rem 0 .8rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1))}
 .card-rarity{position:absolute;top:10px;left:10px;font-size:10px;font-weight:500;padding:3px 8px;border-radius:6px;text-transform:uppercase;letter-spacing:.05em}
 .r-commun{background:#f0f0e8;color:#666}
 .r-uncommon{background:#e8f5ee;color:#2d6a4f}
@@ -80,118 +60,158 @@ main{max-width:1100px;margin:0 auto;padding:3rem 1.5rem}
 .r-legendary{background:#fdf3d8;color:#92400e}
 .r-mythique{background:#fee2e2;color:#991b1b}
 .card-owned-badge{position:absolute;top:10px;right:10px;background:var(--moss);color:#fff;font-size:10px;padding:3px 8px;border-radius:6px}
-.card-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:4px;color:var(--ink)}
-.card-stars{font-size:12px;margin-bottom:10px;color:var(--gold)}
+.card-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;margin-bottom:4px}
+.card-stars{font-size:11px;margin-bottom:8px;color:var(--gold)}
 .card-footer{display:flex;align-items:center;justify-content:space-between}
-.card-price{font-size:15px;font-weight:500;color:var(--ink)}
+.card-price{font-size:14px;font-weight:500}
 .card-price.free{color:var(--moss);font-weight:600}
-.buy-btn{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--ink);font-family:'DM Sans',sans-serif;transition:all .15s}
+.buy-btn{padding:5px 12px;border-radius:8px;font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--ink);font-family:'DM Sans',sans-serif;transition:all .15s}
 .buy-btn:hover:not(:disabled){background:var(--moss);color:#fff;border-color:var(--moss)}
 .buy-btn:disabled{opacity:.4;cursor:not-allowed}
-
-/* SECTIONS */
-.tier-section{margin-bottom:3rem}
+.tier-section{margin-bottom:2.5rem}
 .tier-label{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
-.tier-label h3{font-size:14px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.tier-label h3{font-size:13px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
 .tier-divider{flex:1;height:1px;background:var(--border)}
 
 /* COLLECTION */
-.collection-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px}
-.coll-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;cursor:pointer;transition:all .15s}
+.collection-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px}
+.coll-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;cursor:pointer;transition:all .15s}
 .coll-card:hover{border-color:var(--moss);transform:translateY(-2px)}
-.coll-emoji{font-size:36px;display:block;margin-bottom:6px}
-.coll-name{font-size:11px;color:var(--muted);line-height:1.3}
+.coll-emoji{font-size:32px;display:block;margin-bottom:5px}
+.coll-name{font-size:10px;color:var(--muted);line-height:1.3}
 .empty-state{text-align:center;padding:3rem;color:var(--muted)}
 .empty-state .big{font-size:48px;display:block;margin-bottom:1rem}
-.empty-state p{font-size:15px}
 
 /* COMMUNITY */
 .community-list{display:flex;flex-direction:column;gap:10px}
 .user-card{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between}
 .user-left{display:flex;align-items:center;gap:12px}
-.avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
 .user-name{font-size:14px;font-weight:500}
 .user-sub{font-size:12px;color:var(--muted)}
-.user-animals-row{font-size:22px;letter-spacing:3px}
-.rank-badge{font-size:12px;margin-left:6px}
+.user-animals-row{font-size:20px;letter-spacing:2px}
 
-/* MODAL */
+/* ÉCHANGE */
+.exchange-section{margin-bottom:2rem}
+.exchange-box{background:var(--card-bg);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
+.exchange-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:.5rem}
+.exchange-sub{font-size:13px;color:var(--muted);margin-bottom:1.25rem}
+.exchange-form{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:center;margin-bottom:1rem}
+.exchange-col label{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:6px}
+.exchange-select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--ink);outline:none;cursor:pointer}
+.exchange-select:focus{border-color:var(--moss)}
+.exchange-arrow{font-size:22px;text-align:center;color:var(--muted)}
+.exchange-btn{width:100%;padding:11px;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;border:none;background:var(--moss);color:#fff;font-family:'DM Sans',sans-serif;transition:all .15s}
+.exchange-btn:hover:not(:disabled){background:var(--forest)}
+.exchange-btn:disabled{opacity:.4;cursor:not-allowed;background:var(--border);color:var(--muted)}
+.exchange-offers{margin-top:1.5rem}
+.exchange-offers h4{font-size:13px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem}
+.offer-card{background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.offer-info{display:flex;align-items:center;gap:10px;font-size:13px}
+.offer-emojis{font-size:20px;letter-spacing:4px}
+.offer-text{color:var(--muted)}
+.offer-accept{padding:5px 14px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:var(--moss);color:#fff;font-family:'DM Sans',sans-serif;transition:all .15s}
+.offer-accept:hover{background:var(--forest)}
+.offer-cancel{padding:5px 14px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Sans',sans-serif}
+
+/* MODAL ANIMAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(26,26,26,0.6);z-index:200;align-items:center;justify-content:center;padding:1rem}
 .overlay.open{display:flex}
 .modal{background:var(--cream);border-radius:20px;padding:2rem;max-width:380px;width:100%;position:relative;max-height:90vh;overflow-y:auto}
 .modal-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
 .modal-emoji{font-size:80px;text-align:center;display:block;margin-bottom:1rem}
 .modal-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;text-align:center;margin-bottom:4px}
-.modal-rarity-line{text-align:center;margin-bottom:1.5rem}
+.modal-rarity-line{text-align:center;margin-bottom:1.25rem}
 .modal-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1.25rem}
 .stat-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:10px;text-align:center}
 .stat-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
-.stat-val{font-size:16px;font-weight:600;color:var(--ink)}
+.stat-val{font-size:16px;font-weight:600}
 .modal-desc{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:1.25rem;text-align:center}
 .modal-progress{margin-bottom:1.25rem}
 .progress-label{font-size:11px;color:var(--muted);margin-bottom:4px}
 .progress-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
 .progress-fill{height:100%;background:var(--moss);border-radius:3px;transition:width .6s}
-.modal-btn{width:100%;padding:14px;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;border:none;background:var(--moss);color:#fff;font-family:'DM Sans',sans-serif;transition:all .15s;margin-bottom:8px}
+.modal-btn{width:100%;padding:13px;border-radius:10px;font-size:15px;font-weight:500;cursor:pointer;border:none;background:var(--moss);color:#fff;font-family:'DM Sans',sans-serif;transition:all .15s;margin-bottom:8px}
 .modal-btn:hover:not(:disabled){background:var(--forest)}
 .modal-btn:disabled{opacity:.4;cursor:not-allowed;background:var(--border);color:var(--muted)}
 .modal-btn.secondary{background:transparent;border:1px solid var(--border);color:var(--ink)}
-.modal-btn.secondary:hover{background:var(--border)}
-.ai-section{background:var(--forest);border-radius:12px;padding:1rem;margin-top:1rem}
+.modal-btn.secondary:hover:not(:disabled){background:var(--border)}
+.ai-box{background:var(--forest);border-radius:12px;padding:1rem;margin-top:1rem}
 .ai-label{font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.ai-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:blink 2s infinite}
+.ai-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:blink 2s infinite;display:inline-block}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 .ai-text{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.5}
+#card-element{padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:#fff;margin-bottom:8px}
+.stripe-note{font-size:12px;color:var(--muted);text-align:center;margin-top:4px}
 
-/* AUTH MODAL */
+/* AUTH */
 .auth-modal{background:#fff;border-radius:20px;padding:2rem;max-width:340px;width:100%}
-.auth-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;text-align:center;margin-bottom:0.5rem}
+.auth-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;text-align:center;margin-bottom:.5rem}
 .auth-sub{font-size:14px;color:var(--muted);text-align:center;margin-bottom:1.5rem}
 .field{margin-bottom:14px}
 .field label{display:block;font-size:12px;font-weight:500;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
-.field input{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--ink);outline:none;transition:border-color .15s}
-.field input:focus{border-color:var(--moss)}
+.field input,.field select{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:14px;font-family:'DM Sans',sans-serif;background:#fff;color:var(--ink);outline:none;transition:border-color .15s}
+.field input:focus,.field select:focus{border-color:var(--moss)}
 .auth-btn{width:100%;padding:12px;border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;border:none;background:var(--forest);color:#fff;font-family:'DM Sans',sans-serif;margin-top:6px;transition:all .15s}
 .auth-btn:hover{background:var(--moss)}
 .auth-switch{text-align:center;margin-top:1rem;font-size:13px;color:var(--muted)}
 .auth-switch a{color:var(--moss);cursor:pointer;font-weight:500}
 .auth-error{background:#fee2e2;color:#991b1b;border-radius:8px;padding:8px 12px;font-size:13px;margin-bottom:12px;display:none}
 
-/* TOAST */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--forest);color:#fff;padding:12px 22px;border-radius:12px;font-size:14px;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
-.toast.show{opacity:1}
-
 /* AI DAILY */
-.ai-daily{background:var(--forest);color:#fff;border-radius:16px;padding:1.5rem;margin-bottom:2.5rem;display:flex;align-items:flex-start;gap:1rem}
-.ai-daily-icon{font-size:32px;flex-shrink:0}
+.ai-daily{background:var(--forest);color:#fff;border-radius:16px;padding:1.5rem;margin-bottom:2rem;display:flex;align-items:flex-start;gap:1rem}
+.ai-daily-icon{font-size:30px;flex-shrink:0}
 .ai-daily-label{font-size:11px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
 .ai-daily-text{font-size:14px;color:rgba(255,255,255,0.85);line-height:1.6}
 .ai-daily-btn{margin-top:8px;padding:5px 12px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:20px;color:rgba(255,255,255,0.8);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s}
 .ai-daily-btn:hover{background:rgba(255,255,255,0.2)}
 
-/* STRIPE SECTION */
-.stripe-note{font-size:12px;color:var(--muted);text-align:center;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:4px}
-#card-element{padding:12px 14px;border:1px solid var(--border);border-radius:8px;background:#fff;margin-bottom:8px}
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--forest);color:#fff;padding:12px 22px;border-radius:12px;font-size:14px;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
+
+/* ═══════════════════════════════════════════════
+   🎉 ANIMATION DÉBLOCAGE
+═══════════════════════════════════════════════ */
+.unlock-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transition:opacity .3s}
+.unlock-overlay.active{opacity:1;pointer-events:all}
+.unlock-bg{position:absolute;inset:0;background:rgba(26,58,42,0.85);backdrop-filter:blur(6px)}
+.unlock-box{position:relative;text-align:center;z-index:2}
+.unlock-emoji{font-size:100px;display:block;animation:unlockBounce 0.6s cubic-bezier(.36,.07,.19,.97);transform-origin:center}
+@keyframes unlockBounce{0%{transform:scale(0) rotate(-10deg)}60%{transform:scale(1.2) rotate(5deg)}80%{transform:scale(.95) rotate(-2deg)}100%{transform:scale(1) rotate(0deg)}}
+.unlock-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#fff;margin:.5rem 0 .25rem;animation:fadeUp .5s .2s both}
+.unlock-sub{font-size:16px;color:rgba(255,255,255,0.75);animation:fadeUp .5s .3s both}
+.unlock-rarity{display:inline-block;margin:.75rem 0;padding:6px 18px;border-radius:20px;font-size:13px;font-weight:500;animation:fadeUp .5s .4s both}
+.unlock-close{margin-top:1.5rem;padding:12px 32px;border-radius:10px;background:var(--gold);color:var(--forest);border:none;font-size:15px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;animation:fadeUp .5s .5s both;transition:transform .15s}
+.unlock-close:hover{transform:scale(1.05)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* Confettis */
+.confetti-container{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.confetti-piece{position:absolute;width:10px;height:10px;border-radius:2px;animation:confettiFall linear forwards}
+@keyframes confettiFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+
+/* Spinner */
 .spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* RESPONSIVE */
 @media(max-width:600px){
-  .hero{padding:3rem 1.25rem 2.5rem}
-  .shop-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}
   nav{padding:0 1rem}
   main{padding:2rem 1rem}
+  .exchange-form{grid-template-columns:1fr;gap:.75rem}
+  .exchange-arrow{display:none}
+  .shop-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
 }
 </style>
 </head>
 <body>
 
+<!-- NAVIGATION -->
 <nav>
   <div class="nav-brand">Fauna<span>Rara</span></div>
   <div class="nav-right">
-    <div class="wallet-pill" id="wallet-pill" style="display:none" onclick="showWalletInfo()">
-      <span class="coin">🪙</span>
-      <span id="wallet-balance">0.00 FJ</span>
+    <div class="wallet-pill" id="wallet-pill" style="display:none" onclick="showWalletModal()">
+      <span>🪙</span><span id="wallet-balance">0.00 FJ</span>
     </div>
     <button class="btn-nav" id="btn-login" onclick="openAuth('login')">Connexion</button>
     <button class="btn-nav primary" id="btn-signup" onclick="openAuth('signup')">S'inscrire</button>
@@ -199,38 +219,44 @@ main{max-width:1100px;margin:0 auto;padding:3rem 1.5rem}
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-tag">✦ Collection exclusive</div>
   <h1>Collecte des<br>animaux <em>rares</em><br>avec des Frères Jean</h1>
-  <p>Achetez, collectez et exhibez vos animaux. Plus c'est cher, plus c'est rare. Commencez avec 5 Frères Jean offerts.</p>
+  <p>Achetez, collectez et échangez vos animaux. Plus c'est cher, plus c'est rare. Commencez avec 5 Frères Jean offerts.</p>
   <div class="hero-btns">
     <button class="btn-hero primary" onclick="openAuth('signup')">Commencer — 5 FJ offerts 🎁</button>
-    <button class="btn-hero secondary" onclick="scrollToShop()">Voir la boutique ↓</button>
+    <button class="btn-hero secondary" onclick="document.getElementById('main-shop').scrollIntoView({behavior:'smooth'})">Voir la boutique ↓</button>
   </div>
   <div class="hero-stats">
     <div class="hero-stat"><strong>14</strong><span>Animaux</span></div>
     <div class="hero-stat"><strong>6</strong><span>Niveaux de rareté</span></div>
-    <div class="hero-stat"><strong>∞</strong><span>Collections</span></div>
+    <div class="hero-stat"><strong>∞</strong><span>Échanges possibles</span></div>
   </div>
 </section>
 
+<!-- MAIN -->
 <main id="main-shop">
 
+  <!-- IA CONSEIL DU JOUR -->
   <div class="ai-daily">
     <div class="ai-daily-icon">🌿</div>
     <div>
       <div class="ai-daily-label">✦ Conseil du gardien — IA</div>
-      <div class="ai-daily-text" id="ai-daily-text">Chargement du conseil du jour...</div>
+      <div class="ai-daily-text" id="ai-daily-text">Le gardien observe la forêt...</div>
       <button class="ai-daily-btn" onclick="loadDailyTip()">Nouveau conseil ✨</button>
     </div>
   </div>
 
+  <!-- TABS -->
   <div class="tabs">
     <button class="tab active" onclick="switchTab('shop',this)">🛒 Boutique</button>
-    <button class="tab" onclick="switchTab('collection',this)">🗂 Ma collection</button>
+    <button class="tab" onclick="switchTab('collection',this)">🗂 Collection</button>
+    <button class="tab" onclick="switchTab('exchange',this)">🔄 Échanges</button>
     <button class="tab" onclick="switchTab('community',this)">🌍 Communauté</button>
   </div>
 
+  <!-- BOUTIQUE -->
   <div id="tab-shop">
     <div class="tier-section">
       <div class="tier-label"><h3>Communs · 0€ – 1€</h3><div class="tier-divider"></div></div>
@@ -246,56 +272,85 @@ main{max-width:1100px;margin:0 auto;padding:3rem 1.5rem}
     </div>
   </div>
 
+  <!-- COLLECTION -->
   <div id="tab-collection" style="display:none">
     <div id="collection-content"></div>
   </div>
 
+  <!-- ÉCHANGES -->
+  <div id="tab-exchange" style="display:none">
+    <div class="exchange-section">
+      <div class="exchange-box">
+        <div class="exchange-title">🔄 Proposer un échange</div>
+        <div class="exchange-sub">Offre un de tes animaux contre celui d'un autre collectionneur</div>
+        <div class="exchange-form">
+          <div class="exchange-col">
+            <label>Tu offres</label>
+            <select class="exchange-select" id="offer-give">
+              <option value="">— Choisis un animal —</option>
+            </select>
+          </div>
+          <div class="exchange-arrow">⇄</div>
+          <div class="exchange-col">
+            <label>Tu veux</label>
+            <select class="exchange-select" id="offer-want">
+              <option value="">— Choisis un animal —</option>
+            </select>
+          </div>
+        </div>
+        <button class="exchange-btn" id="exchange-submit-btn" onclick="submitOffer()">Proposer l'échange</button>
+        <div id="exchange-offers" class="exchange-offers" style="display:none">
+          <h4>Offres en attente</h4>
+          <div id="offers-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMUNAUTÉ -->
   <div id="tab-community" style="display:none">
     <div id="community-content"></div>
   </div>
 
 </main>
 
-<!-- ANIMAL MODAL -->
-<div class="overlay" id="animal-modal" onclick="closeAnimalModal(event)">
+<!-- MODAL ANIMAL -->
+<div class="overlay" id="animal-modal" onclick="if(event.target.id==='animal-modal')closeAnimalModal()">
   <div class="modal">
-    <button class="modal-close" onclick="document.getElementById('animal-modal').classList.remove('open')">✕</button>
+    <button class="modal-close" onclick="closeAnimalModal()">✕</button>
     <span class="modal-emoji" id="m-emoji"></span>
     <div class="modal-name" id="m-name"></div>
     <div class="modal-rarity-line" id="m-rarity-line"></div>
     <div class="modal-stats">
       <div class="stat-card"><div class="stat-label">Prix</div><div class="stat-val" id="m-price"></div></div>
-      <div class="stat-card"><div class="stat-label">En circulation</div><div class="stat-val" id="m-circ"></div></div>
+      <div class="stat-card"><div class="stat-label">Circulation</div><div class="stat-val" id="m-circ"></div></div>
       <div class="stat-card"><div class="stat-label">Mes FJ</div><div class="stat-val" id="m-fj"></div></div>
       <div class="stat-card"><div class="stat-label">Rareté</div><div class="stat-val" id="m-stars"></div></div>
     </div>
     <div class="modal-desc" id="m-desc"></div>
     <div class="modal-progress">
-      <div class="progress-label" id="m-prog-label">Taux de possession global</div>
+      <div class="progress-label">Taux de possession global</div>
       <div class="progress-bar"><div class="progress-fill" id="m-prog-fill"></div></div>
     </div>
-
-    <!-- Payment section -->
     <div id="payment-section">
       <button class="modal-btn" id="m-main-btn" onclick="handleBuy()">Acheter</button>
       <div id="stripe-form" style="display:none">
         <div id="card-element"></div>
         <button class="modal-btn" id="m-pay-btn" onclick="confirmPayment()">Payer</button>
-        <div class="stripe-note">🔒 Paiement sécurisé par <strong>Stripe</strong></div>
+        <div class="stripe-note">🔒 Paiement sécurisé par Stripe</div>
       </div>
     </div>
-
-    <div class="ai-section">
+    <div class="ai-box">
       <div class="ai-label"><span class="ai-dot"></span> Analyse du gardien</div>
-      <div class="ai-text" id="m-ai">Clique sur un animal pour obtenir une analyse !</div>
+      <div class="ai-text" id="m-ai">Clique sur un animal pour une analyse !</div>
     </div>
   </div>
 </div>
 
 <!-- AUTH MODAL -->
-<div class="overlay" id="auth-modal" onclick="closeAuthModal(event)">
+<div class="overlay" id="auth-modal" onclick="if(event.target.id==='auth-modal')document.getElementById('auth-modal').classList.remove('open')">
   <div class="auth-modal">
-    <div class="auth-title" id="auth-title">Bienvenue</div>
+    <div class="auth-title" id="auth-title">Bienvenue !</div>
     <div class="auth-sub" id="auth-sub">Crée ton compte et reçois 5 FJ offerts</div>
     <div class="auth-error" id="auth-error"></div>
     <div class="field" id="name-field">
@@ -317,8 +372,8 @@ main{max-width:1100px;margin:0 auto;padding:3rem 1.5rem}
   </div>
 </div>
 
-<!-- WALLET INFO MODAL -->
-<div class="overlay" id="wallet-modal" onclick="closeWalletModal(event)">
+<!-- WALLET MODAL -->
+<div class="overlay" id="wallet-modal" onclick="if(event.target.id==='wallet-modal')document.getElementById('wallet-modal').classList.remove('open')">
   <div class="auth-modal">
     <div class="auth-title">Mon portefeuille 🪙</div>
     <div class="auth-sub">Frères Jean (FJ) — ta monnaie de collection</div>
@@ -326,130 +381,158 @@ main{max-width:1100px;margin:0 auto;padding:3rem 1.5rem}
       <div style="font-size:13px;color:var(--muted);margin-bottom:4px">Solde actuel</div>
       <div style="font-size:36px;font-weight:700;font-family:'Playfair Display',serif;color:var(--forest)" id="wallet-big-balance">0.00 FJ</div>
     </div>
-    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:1.25rem">
-      Les <strong>Frères Jean (FJ)</strong> sont achetés via Stripe (1 FJ = 1 €). Chaque animal a un prix en FJ selon sa rareté. Plus l'animal est rare, plus il coûte de FJ — et moins de personnes le possèdent !
-    </p>
+    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:1.25rem">1 FJ = 1 € · Utilisable pour acheter des animaux rares dans la boutique.</p>
     <div class="field">
       <label>Recharger (montant en €)</label>
       <input type="number" id="topup-amount" placeholder="ex: 10" min="1" max="100">
     </div>
     <button class="auth-btn" onclick="topUpWallet()">Recharger avec Stripe 💳</button>
-    <button class="modal-btn secondary" style="margin-top:8px" onclick="document.getElementById('wallet-modal').classList.remove('open')">Fermer</button>
+    <button class="modal-btn secondary" style="margin-top:8px;width:100%;padding:10px;border-radius:8px;font-size:14px;cursor:pointer;border:1px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif" onclick="document.getElementById('wallet-modal').classList.remove('open')">Fermer</button>
+  </div>
+</div>
+
+<!-- 🎉 ANIMATION DÉBLOCAGE -->
+<div class="unlock-overlay" id="unlock-overlay" onclick="closeUnlock()">
+  <div class="confetti-container" id="confetti-container"></div>
+  <div class="unlock-box">
+    <span class="unlock-emoji" id="unlock-emoji">🦁</span>
+    <div class="unlock-title" id="unlock-title">Nouvel animal !</div>
+    <div class="unlock-sub" id="unlock-sub">rejoint ta collection</div>
+    <div class="unlock-rarity" id="unlock-rarity-badge">Légendaire</div>
+    <button class="unlock-close" onclick="closeUnlock()">Super ! Continuer 🎊</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const API = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '/api';
-const STRIPE_PK = 'pk_test_51Tdaf00qYeQnXxqI22T7fkWDNO0kTha5t61mQ6Qy5Ac7TYv5nRcUUZkjzczZolxoUyGv26OHu7AwGlOILL3tAjEA00wSs2UQ71'; // ← Remplace par ta clé Stripe publique
+// ══════════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════════
+const API = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
+const STRIPE_PK = 'pk_test_REMPLACE_MOI'; // ← Ta clé publique Stripe ici
 
 const ANIMALS = [
-  {id:'pigeon',name:'Pigeon voyageur',emoji:'🕊️',price:0,rarity:'commun',desc:'Le fidèle messager. Gratuit pour tous, mais précieux pour son histoire.',stars:1,tier:'common'},
+  {id:'pigeon',name:'Pigeon voyageur',emoji:'🕊️',price:0,rarity:'commun',desc:'Le fidèle messager. Gratuit pour tous.',stars:1,tier:'common'},
   {id:'hamster',name:'Hamster doré',emoji:'🐹',price:0.20,rarity:'commun',desc:'Petit et mignon, il tourne dans sa roue toute la nuit.',stars:1,tier:'common'},
   {id:'lapin',name:'Lapin des neiges',emoji:'🐇',price:0.50,rarity:'commun',desc:'Blanc comme neige, il disparaît en hiver dans les alpages.',stars:1,tier:'common'},
   {id:'renard',name:'Renard arctique',emoji:'🦊',price:0.80,rarity:'peu commun',desc:'Malin et rusé, il survit dans les contrées glacées.',stars:2,tier:'common'},
-  {id:'chat',name:'Chat de Pallas',emoji:'🐱',price:1.00,rarity:'peu commun',desc:'Le plus expressif des félins sauvages. Un regard qui tue.',stars:2,tier:'common'},
-  {id:'lynx',name:'Lynx ibérique',emoji:'🐆',price:2.00,rarity:'rare',desc:"L'un des félins les plus menacés d'Europe. Sa rareté est réelle.",stars:3,tier:'rare'},
-  {id:'panda',name:'Panda roux',emoji:'🦝',price:2.50,rarity:'rare',desc:'Ni panda ni raton laveur. Un animal unique et mystérieux.',stars:3,tier:'rare'},
-  {id:'axolotl',name:'Axolotl',emoji:'🦎',price:3.00,rarity:'rare',desc:'La salamandre qui ne grandit jamais. Capable de se régénérer.',stars:3,tier:'rare'},
+  {id:'chat',name:'Chat de Pallas',emoji:'🐱',price:1.00,rarity:'peu commun',desc:'Le plus expressif des félins sauvages.',stars:2,tier:'common'},
+  {id:'lynx',name:'Lynx ibérique',emoji:'🐆',price:2.00,rarity:'rare',desc:"L'un des félins les plus menacés d'Europe.",stars:3,tier:'rare'},
+  {id:'panda',name:'Panda roux',emoji:'🦝',price:2.50,rarity:'rare',desc:'Ni panda ni raton laveur. Un animal unique.',stars:3,tier:'rare'},
+  {id:'axolotl',name:'Axolotl',emoji:'🦎',price:3.00,rarity:'rare',desc:'La salamandre qui ne grandit jamais.',stars:3,tier:'rare'},
   {id:'narval',name:'Narval',emoji:'🦄',price:4.00,rarity:'épique',desc:'La licorne des mers. Sa corne peut mesurer 3 mètres.',stars:4,tier:'rare'},
-  {id:'okapi',name:'Okapi',emoji:'🦓',price:5.00,rarity:'épique',desc:'Mi-zèbre, mi-girafe. Découvert seulement en 1901.',stars:4,tier:'rare'},
-  {id:'tasmanian',name:'Diable de Tasmanie',emoji:'🦁',price:6.00,rarity:'légendaire',desc:'Le prédateur marsupial le plus féroce. Rugissement terrifiable.',stars:5,tier:'legendary'},
-  {id:'pangolin',name:"Pangolin d'or",emoji:'🐾',price:8.00,rarity:'légendaire',desc:"L'animal le plus braconné au monde. Chaque écaille est unique.",stars:5,tier:'legendary'},
-  {id:'quetzal',name:'Quetzal resplendissant',emoji:'🦚',price:10.00,rarity:'mythique',desc:'Dieu des Aztèques. Ses plumes valent plus que l\'or.',stars:5,tier:'legendary'},
+  {id:'okapi',name:'Okapi',emoji:'🦓',price:5.00,rarity:'épique',desc:'Mi-zèbre, mi-girafe. Découvert en 1901.',stars:4,tier:'rare'},
+  {id:'tasmanian',name:'Diable de Tasmanie',emoji:'🦁',price:6.00,rarity:'légendaire',desc:'Le prédateur marsupial le plus féroce.',stars:5,tier:'legendary'},
+  {id:'pangolin',name:"Pangolin d'or",emoji:'🐾',price:8.00,rarity:'légendaire',desc:"L'animal le plus braconné au monde.",stars:5,tier:'legendary'},
+  {id:'quetzal',name:'Quetzal resplendissant',emoji:'🦚',price:10.00,rarity:'mythique',desc:"Dieu des Aztèques. Ses plumes valent plus que l'or.",stars:5,tier:'legendary'},
   {id:'dragon',name:'Dragon de Komodo',emoji:'🐉',price:15.00,rarity:'mythique',desc:'Le dragon vivant. Venimeux, imposant, invincible.',stars:5,tier:'legendary'},
 ];
 
-let state = {user:null, balance:0, owned:new Set(), selectedAnimal:null, stripe:null, cardElement:null, paymentIntent:null};
+const RARITY_COLORS = {commun:'#f0f0e8','peu commun':'#e8f5ee',rare:'#e8eef8','épique':'#f0eafc','légendaire':'#fdf3d8',mythique:'#fee2e2'};
+const RARITY_TEXT = {commun:'#666','peu commun':'#2d6a4f',rare:'#1e40af','épique':'#6b21a8','légendaire':'#92400e',mythique:'#991b1b'};
 
-// --- INIT ---
+let state = {user:null,balance:0,owned:new Set(),selectedAnimal:null,stripe:null,cardElement:null,paymentIntent:null,offers:[]};
+
+// DEMO offers
+const DEMO_OFFERS = [
+  {id:'o1',from:'Léa',give:'lynx',giveEmoji:'🐆',want:'hamster',wantEmoji:'🐹',isDemo:true},
+  {id:'o2',from:'Théo',give:'narval',giveEmoji:'🦄',want:'renard',wantEmoji:'🦊',isDemo:true},
+];
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
 async function init(){
   loadDailyTip();
   renderAll();
   const token = localStorage.getItem('faunaToken');
-  if(token){ await loadUser(token); }
+  if(token) await loadUser(token);
 }
 
 async function loadUser(token){
   try{
-    const r = await fetch(API+'/me', {headers:{'Authorization':'Bearer '+token}});
-    if(!r.ok){ localStorage.removeItem('faunaToken'); return; }
+    const r = await fetch(API+'/api/me',{headers:{'Authorization':'Bearer '+token}});
+    if(!r.ok){localStorage.removeItem('faunaToken');return;}
     const d = await r.json();
-    state.user = d.user;
-    state.balance = d.balance;
-    state.owned = new Set(d.owned);
-    updateUI();
-    renderAll();
-  }catch(e){ console.log('Server not available, running in demo mode'); }
+    state.user=d.user; state.balance=d.balance; state.owned=new Set(d.owned);
+    updateUI(); renderAll();
+  }catch(e){console.log('Mode démo actif');}
 }
 
 function updateUI(){
-  const loggedIn = !!state.user;
-  document.getElementById('btn-login').style.display = loggedIn?'none':'';
-  document.getElementById('btn-signup').style.display = loggedIn?'none':'';
-  document.getElementById('btn-logout').style.display = loggedIn?'':'none';
-  document.getElementById('wallet-pill').style.display = loggedIn?'':'none';
+  const ok = !!state.user;
+  document.getElementById('btn-login').style.display = ok?'none':'';
+  document.getElementById('btn-signup').style.display = ok?'none':'';
+  document.getElementById('btn-logout').style.display = ok?'':'none';
+  document.getElementById('wallet-pill').style.display = ok?'':'none';
   document.getElementById('wallet-balance').textContent = state.balance.toFixed(2)+' FJ';
 }
 
-// --- RENDER ---
-function rarityClass(r){ const m={commun:'commun','peu commun':'uncommon',rare:'rare','épique':'epic','légendaire':'legendary',mythique:'mythique'}; return 'r-'+(m[r]||'commun'); }
-function renderStars(n){ return '⭐'.repeat(n)+'☆'.repeat(5-n); }
+// ══════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════
+function rc(r){const m={commun:'commun','peu commun':'uncommon',rare:'rare','épique':'epic','légendaire':'legendary',mythique:'mythique'};return 'r-'+(m[r]||'commun');}
+function rs(n){return '⭐'.repeat(n)+'☆'.repeat(5-n);}
 
-function renderGrid(id, animals){
-  const g = document.getElementById(id); if(!g)return;
-  g.innerHTML = animals.map(a=>`
+function renderGrid(id,animals){
+  const g=document.getElementById(id);if(!g)return;
+  g.innerHTML=animals.map(a=>`
     <div class="animal-card ${state.owned.has(a.id)?'owned':''}" onclick="openAnimal('${a.id}')">
-      ${state.owned.has(a.id)?'<span class="card-owned-badge">✓ Possédé</span>':''}
-      <span class="card-rarity ${rarityClass(a.rarity)}">${a.rarity}</span>
+      ${state.owned.has(a.id)?'<span class="card-owned-badge">✓</span>':''}
+      <span class="card-rarity ${rc(a.rarity)}">${a.rarity}</span>
       <span class="card-emoji">${a.emoji}</span>
       <div class="card-name">${a.name}</div>
-      <div class="card-stars">${renderStars(a.stars)}</div>
+      <div class="card-stars">${rs(a.stars)}</div>
       <div class="card-footer">
         <span class="card-price ${a.price===0?'free':''}">${a.price===0?'Gratuit':'€'+a.price.toFixed(2)}</span>
         <button class="buy-btn" ${state.owned.has(a.id)?'disabled':''} onclick="event.stopPropagation();openAnimal('${a.id}')">${state.owned.has(a.id)?'✓':'Acheter'}</button>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function renderAll(){
-  renderGrid('grid-common', ANIMALS.filter(a=>a.tier==='common'));
-  renderGrid('grid-rare', ANIMALS.filter(a=>a.tier==='rare'));
-  renderGrid('grid-legendary', ANIMALS.filter(a=>a.tier==='legendary'));
+  renderGrid('grid-common',ANIMALS.filter(a=>a.tier==='common'));
+  renderGrid('grid-rare',ANIMALS.filter(a=>a.tier==='rare'));
+  renderGrid('grid-legendary',ANIMALS.filter(a=>a.tier==='legendary'));
 }
 
-// --- TABS ---
-function switchTab(tab, el){
+function switchTab(tab,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
-  ['shop','collection','community'].forEach(t=>{ document.getElementById('tab-'+t).style.display=t===tab?'':'none'; });
+  ['shop','collection','exchange','community'].forEach(t=>{
+    document.getElementById('tab-'+t).style.display=t===tab?'':'none';
+  });
   if(tab==='collection') renderCollection();
   if(tab==='community') renderCommunity();
+  if(tab==='exchange') renderExchange();
 }
 
 function renderCollection(){
-  const c = document.getElementById('collection-content');
-  if(!state.user){ c.innerHTML='<div class="empty-state"><span class="big">🔐</span><p>Connecte-toi pour voir ta collection</p></div>'; return; }
-  const mine = ANIMALS.filter(a=>state.owned.has(a.id));
-  if(mine.length===0){ c.innerHTML='<div class="empty-state"><span class="big">🐾</span><p>Ta collection est vide. Visite la boutique !</p></div>'; return; }
-  c.innerHTML=`<p style="font-size:14px;color:var(--muted);margin-bottom:1rem;">${mine.length} animal${mine.length>1?'s':''} collecté${mine.length>1?'s':''} · Solde : ${state.balance.toFixed(2)} FJ</p>
-  <div class="collection-grid">${mine.map(a=>`<div class="coll-card" onclick="openAnimal('${a.id}')"><span class="coll-emoji">${a.emoji}</span><div class="coll-name">${a.name}</div></div>`).join('')}</div>`;
+  const c=document.getElementById('collection-content');
+  if(!state.user){c.innerHTML='<div class="empty-state"><span class="big">🔐</span><p>Connecte-toi pour voir ta collection</p></div>';return;}
+  const mine=ANIMALS.filter(a=>state.owned.has(a.id));
+  if(mine.length===0){c.innerHTML='<div class="empty-state"><span class="big">🐾</span><p>Ta collection est vide. Visite la boutique !</p></div>';return;}
+  c.innerHTML=`<p style="font-size:14px;color:var(--muted);margin-bottom:1rem">${mine.length} animal${mine.length>1?'s':''} · ${state.balance.toFixed(2)} FJ</p>
+  <div class="collection-grid">${mine.map(a=>`
+    <div class="coll-card" onclick="openAnimal('${a.id}')">
+      <span class="coll-emoji">${a.emoji}</span>
+      <div class="coll-name">${a.name}</div>
+    </div>`).join('')}</div>`;
 }
 
 function renderCommunity(){
-  const c = document.getElementById('community-content');
-  const DEMO_USERS = [
-    {name:'Léa',color:'#60a5fa',animals:['🕊️','🐇','🐱','🦎','🦝','🦚'],count:6,isTop:true},
+  const c=document.getElementById('community-content');
+  const DEMO=[
+    {name:'Léa',color:'#60a5fa',animals:['🕊️','🐇','🐱','🦎','🦝','🦚'],count:6},
     {name:'Marie-Claire',color:'#818cf8',animals:['🦊','🐇','🕊️','🐆','🦝'],count:5},
     {name:'Théo',color:'#34d399',animals:['🐹','🐇','🦎','🦄'],count:4},
     {name:'Aminata',color:'#f472b6',animals:['🕊️','🐱','🐾','🦁'],count:4},
     {name:'Bastien',color:'#fbbf24',animals:['🐹','🦊','🦓','🐉'],count:4},
   ];
-  const me = state.user ? [{name:state.user.name,color:'#2d6a4f',animals:ANIMALS.filter(a=>state.owned.has(a.id)).map(a=>a.emoji),count:state.owned.size,isMe:true}] : [];
-  const all = [...me,...DEMO_USERS].sort((a,b)=>b.count-a.count);
-  c.innerHTML=`<p style="font-size:14px;color:var(--muted);margin-bottom:1rem;">🌍 ${all.length} collectionneurs dans le monde</p>
+  const me=state.user?[{name:'Toi',color:'#2d6a4f',animals:ANIMALS.filter(a=>state.owned.has(a.id)).map(a=>a.emoji),count:state.owned.size,isMe:true}]:[];
+  const all=[...me,...DEMO].sort((a,b)=>b.count-a.count);
+  c.innerHTML=`<p style="font-size:14px;color:var(--muted);margin-bottom:1rem">🌍 ${all.length} collectionneurs dans le monde</p>
   <div class="community-list">${all.map((u,i)=>`
     <div class="user-card">
       <div class="user-left">
@@ -460,202 +543,311 @@ function renderCommunity(){
         </div>
       </div>
       <div class="user-animals-row">${u.animals.slice(0,6).join('')}</div>
-    </div>
-  `).join('')}</div>`;
+    </div>`).join('')}</div>`;
 }
 
-// --- ANIMAL MODAL ---
-function openAnimal(id){
-  const a = ANIMALS.find(x=>x.id===id); if(!a) return;
-  state.selectedAnimal = a;
-  document.getElementById('m-emoji').textContent = a.emoji;
-  document.getElementById('m-name').textContent = a.name;
-  document.getElementById('m-rarity-line').innerHTML = `<span class="card-rarity ${rarityClass(a.rarity)}" style="position:static;font-size:12px">${a.rarity}</span>`;
-  document.getElementById('m-price').textContent = a.price===0?'Gratuit':'€'+a.price.toFixed(2);
-  document.getElementById('m-fj').textContent = state.balance.toFixed(2)+' FJ';
-  document.getElementById('m-stars').textContent = renderStars(a.stars);
-  document.getElementById('m-desc').textContent = a.desc;
-  const total=6; const owns=Math.floor(Math.random()*3)+1;
-  document.getElementById('m-circ').textContent = owns+'/'+total;
-  document.getElementById('m-prog-fill').style.width = Math.round(owns/total*100)+'%';
-  const btn = document.getElementById('m-main-btn');
-  if(state.owned.has(id)){
-    btn.textContent='✓ Déjà dans ta collection'; btn.disabled=true;
-  } else if(a.price===0){
-    btn.textContent='Obtenir gratuitement'; btn.disabled=false;
-  } else {
-    btn.textContent='Acheter pour €'+a.price.toFixed(2); btn.disabled=!state.user;
-    if(!state.user) btn.textContent='Connecte-toi pour acheter';
+// ══════════════════════════════════════════
+// ÉCHANGES
+// ══════════════════════════════════════════
+function renderExchange(){
+  if(!state.user){
+    document.getElementById('tab-exchange').innerHTML='<div class="empty-state"><span class="big">🔐</span><p>Connecte-toi pour accéder aux échanges</p></div>';
+    return;
   }
+  // Remplir les selects
+  const giveSelect=document.getElementById('offer-give');
+  const wantSelect=document.getElementById('offer-want');
+  const myAnimals=ANIMALS.filter(a=>state.owned.has(a.id));
+  const otherAnimals=ANIMALS.filter(a=>!state.owned.has(a.id));
+
+  giveSelect.innerHTML='<option value="">— Choisis un animal à offrir —</option>'+
+    myAnimals.map(a=>`<option value="${a.id}">${a.emoji} ${a.name} (${a.rarity})</option>`).join('');
+  wantSelect.innerHTML='<option value="">— Choisis ce que tu veux —</option>'+
+    ANIMALS.map(a=>`<option value="${a.id}">${a.emoji} ${a.name} (${a.rarity})</option>`).join('');
+
+  renderOffers();
+}
+
+function renderOffers(){
+  const allOffers=[...DEMO_OFFERS,...state.offers];
+  const container=document.getElementById('exchange-offers');
+  const list=document.getElementById('offers-list');
+  if(allOffers.length===0){container.style.display='none';return;}
+  container.style.display='block';
+  list.innerHTML=allOffers.map(o=>`
+    <div class="offer-card" id="offer-${o.id}">
+      <div class="offer-info">
+        <div>
+          <div style="font-weight:500;font-size:13px">${o.isDemo?o.from:'Toi'} propose :</div>
+          <div class="offer-emojis">${o.giveEmoji} ➜ ${o.wantEmoji}</div>
+          <div class="offer-text">${getAnimalById(o.give)?.name||o.give} contre ${getAnimalById(o.want)?.name||o.want}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        ${o.isDemo?`<button class="offer-accept" onclick="acceptOffer('${o.id}')">Accepter</button>`:''}
+        <button class="offer-cancel" onclick="cancelOffer('${o.id}')">Annuler</button>
+      </div>
+    </div>`).join('');
+}
+
+function getAnimalById(id){return ANIMALS.find(a=>a.id===id);}
+
+function submitOffer(){
+  const give=document.getElementById('offer-give').value;
+  const want=document.getElementById('offer-want').value;
+  if(!give||!want){showToast('Choisis les deux animaux !');return;}
+  if(give===want){showToast('Tu ne peux pas échanger un animal contre lui-même !');return;}
+  const giveA=getAnimalById(give);
+  const wantA=getAnimalById(want);
+  const newOffer={id:'o'+Date.now(),from:state.user.name,give,giveEmoji:giveA.emoji,want,wantEmoji:wantA.emoji,isDemo:false};
+  state.offers.push(newOffer);
+  renderOffers();
+  showToast('✅ Offre publiée ! En attente d\'un échange...');
+  document.getElementById('offer-give').value='';
+  document.getElementById('offer-want').value='';
+}
+
+function acceptOffer(id){
+  const offer=DEMO_OFFERS.find(o=>o.id===id)||state.offers.find(o=>o.id===id);
+  if(!offer)return;
+  if(!state.owned.has(offer.want)){showToast('❌ Tu ne possèdes pas '+getAnimalById(offer.want)?.name);return;}
+  // Exécuter l'échange
+  state.owned.delete(offer.want);
+  state.owned.add(offer.give);
+  const idx=DEMO_OFFERS.indexOf(offer);
+  if(idx>-1) DEMO_OFFERS.splice(idx,1);
+  renderAll();
+  renderOffers();
+  renderCollection();
+  const giveA=getAnimalById(offer.give);
+  showUnlockAnimation(giveA,'Échange réussi !','a rejoint ta collection via un échange !');
+}
+
+function cancelOffer(id){
+  const idx=state.offers.findIndex(o=>o.id===id);
+  if(idx>-1){state.offers.splice(idx,1);renderOffers();showToast('Offre annulée');}
+  else{const di=DEMO_OFFERS.findIndex(o=>o.id===id);if(di>-1){DEMO_OFFERS.splice(di,1);renderOffers();}}
+}
+
+// ══════════════════════════════════════════
+// MODAL ANIMAL
+// ══════════════════════════════════════════
+function openAnimal(id){
+  const a=ANIMALS.find(x=>x.id===id);if(!a)return;
+  state.selectedAnimal=a;
+  document.getElementById('m-emoji').textContent=a.emoji;
+  document.getElementById('m-name').textContent=a.name;
+  document.getElementById('m-rarity-line').innerHTML=`<span class="card-rarity ${rc(a.rarity)}" style="position:static;font-size:12px">${a.rarity}</span>`;
+  document.getElementById('m-price').textContent=a.price===0?'Gratuit':'€'+a.price.toFixed(2);
+  document.getElementById('m-fj').textContent=state.balance.toFixed(2)+' FJ';
+  document.getElementById('m-stars').textContent=rs(a.stars);
+  document.getElementById('m-desc').textContent=a.desc;
+  const owns=Math.floor(Math.random()*3)+1;const total=6;
+  document.getElementById('m-circ').textContent=owns+'/'+total;
+  document.getElementById('m-prog-fill').style.width=Math.round(owns/total*100)+'%';
+  const btn=document.getElementById('m-main-btn');
+  if(state.owned.has(id)){btn.textContent='✓ Dans ta collection';btn.disabled=true;}
+  else if(a.price===0){btn.textContent='Obtenir gratuitement';btn.disabled=false;}
+  else{btn.textContent='Acheter pour €'+a.price.toFixed(2);btn.disabled=!state.user;if(!state.user)btn.textContent='Connecte-toi pour acheter';}
   document.getElementById('stripe-form').style.display='none';
   document.getElementById('m-ai').textContent='Analyse en cours...';
   document.getElementById('animal-modal').classList.add('open');
   getAnimalAI(a);
 }
 
-function closeAnimalModal(e){ if(e.target.id==='animal-modal') document.getElementById('animal-modal').classList.remove('open'); }
+function closeAnimalModal(){document.getElementById('animal-modal').classList.remove('open');}
 
 async function handleBuy(){
-  const a = state.selectedAnimal; if(!a) return;
-  if(!state.user){ openAuth('login'); return; }
-  if(state.owned.has(a.id)) return;
-  if(a.price===0){
-    await doBuyFree(a.id); return;
-  }
-  if(state.balance >= a.price){
-    await doBuyWithBalance(a.id, a.price); return;
-  }
-  await startStripePayment(a);
+  const a=state.selectedAnimal;if(!a)return;
+  if(!state.user){openAuth('login');return;}
+  if(state.owned.has(a.id))return;
+  if(a.price===0){await doBuy(a.id,0);return;}
+  if(state.balance>=a.price){await doBuy(a.id,a.price);return;}
+  await startStripe(a);
 }
 
-async function doBuyFree(id){
+async function doBuy(id,price){
   try{
-    const r = await fetch(API+'/buy', {method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('faunaToken')},body:JSON.stringify({animalId:id,useFJ:true})});
-    const d = await r.json();
-    if(d.success){ state.owned.add(id); state.balance=d.balance; updateUI(); renderAll(); showToast('🎉 Obtenu !'); document.getElementById('animal-modal').classList.remove('open'); }
+    const r=await fetch(API+'/api/buy',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('faunaToken')},body:JSON.stringify({animalId:id})});
+    const d=await r.json();
+    if(d.success){state.owned.add(id);state.balance=d.balance;finishBuy(id);}
     else showToast('Erreur: '+d.error);
-  }catch(e){ state.owned.add(id); renderAll(); showToast('🎉 Obtenu ! (mode démo)'); document.getElementById('animal-modal').classList.remove('open'); }
+  }catch(e){state.owned.add(id);state.balance=parseFloat((state.balance-price).toFixed(2));finishBuy(id);}
 }
 
-async function doBuyWithBalance(id, price){
-  try{
-    const r = await fetch(API+'/buy', {method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('faunaToken')},body:JSON.stringify({animalId:id,useFJ:true})});
-    const d = await r.json();
-    if(d.success){ state.owned.add(id); state.balance=d.balance; updateUI(); renderAll(); showToast('🎉 Animal obtenu !'); document.getElementById('animal-modal').classList.remove('open'); }
-  }catch(e){ state.owned.add(id); state.balance-=price; updateUI(); renderAll(); showToast('🎉 Obtenu ! (mode démo)'); document.getElementById('animal-modal').classList.remove('open'); }
+function finishBuy(id){
+  updateUI();renderAll();closeAnimalModal();
+  const a=ANIMALS.find(x=>x.id===id);
+  showUnlockAnimation(a);
 }
 
-async function startStripePayment(a){
+async function startStripe(a){
   showToast('💳 Préparation du paiement...');
   try{
-    const r = await fetch(API+'/create-payment-intent', {method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('faunaToken')},body:JSON.stringify({animalId:a.id,amount:Math.round(a.price*100)})});
-    const d = await r.json();
-    state.paymentIntent = d.clientSecret;
-    if(!state.stripe) state.stripe = Stripe(STRIPE_PK);
-    const elements = state.stripe.elements();
-    state.cardElement = elements.create('card',{style:{base:{fontFamily:'DM Sans, sans-serif',fontSize:'14px'}}});
+    const r=await fetch(API+'/api/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('faunaToken')},body:JSON.stringify({animalId:a.id,amount:Math.round(a.price*100)})});
+    const d=await r.json();
+    state.paymentIntent=d.clientSecret;
+    if(!state.stripe)state.stripe=Stripe(STRIPE_PK);
+    const elements=state.stripe.elements();
+    state.cardElement=elements.create('card',{style:{base:{fontFamily:'DM Sans, sans-serif',fontSize:'14px'}}});
     document.getElementById('card-element').innerHTML='';
     state.cardElement.mount('#card-element');
     document.getElementById('stripe-form').style.display='block';
     document.getElementById('m-main-btn').style.display='none';
-  }catch(e){
-    showToast('⚠️ Serveur indisponible. Configure le backend pour les vrais paiements.');
-  }
+  }catch(e){showToast('⚠️ Configure le backend Stripe pour les vrais paiements.');}
 }
 
 async function confirmPayment(){
-  const btn = document.getElementById('m-pay-btn');
-  btn.innerHTML='<span class="spinner"></span>Traitement...'; btn.disabled=true;
+  const btn=document.getElementById('m-pay-btn');
+  btn.innerHTML='<span class="spinner"></span>Traitement...';btn.disabled=true;
   try{
-    const {paymentIntent, error} = await state.stripe.confirmCardPayment(state.paymentIntent, {payment_method:{card:state.cardElement}});
-    if(error){ showToast('❌ '+error.message); btn.textContent='Réessayer'; btn.disabled=false; return; }
-    if(paymentIntent.status==='succeeded'){
-      const a = state.selectedAnimal;
-      state.owned.add(a.id); renderAll(); updateUI();
-      showToast('🎉 Paiement réussi ! '+a.name+' est dans ta collection !');
-      document.getElementById('animal-modal').classList.remove('open');
-    }
-  }catch(e){ btn.textContent='Réessayer'; btn.disabled=false; }
+    const {paymentIntent,error}=await state.stripe.confirmCardPayment(state.paymentIntent,{payment_method:{card:state.cardElement}});
+    if(error){showToast('❌ '+error.message);btn.textContent='Réessayer';btn.disabled=false;return;}
+    if(paymentIntent.status==='succeeded'){finishBuy(state.selectedAnimal.id);}
+  }catch(e){btn.textContent='Réessayer';btn.disabled=false;}
 }
 
-// --- AUTH ---
-let authMode = 'signup';
+// ══════════════════════════════════════════
+// 🎉 ANIMATION DÉBLOCAGE
+// ══════════════════════════════════════════
+function showUnlockAnimation(animal,title,sub){
+  if(!animal)return;
+  document.getElementById('unlock-emoji').textContent=animal.emoji;
+  document.getElementById('unlock-title').textContent=title||(''+animal.name+' obtenu !');
+  document.getElementById('unlock-sub').textContent=sub||'vient de rejoindre ta collection !';
+  const badge=document.getElementById('unlock-rarity-badge');
+  badge.textContent=animal.rarity.charAt(0).toUpperCase()+animal.rarity.slice(1);
+  badge.style.background=RARITY_COLORS[animal.rarity]||'#fdf3d8';
+  badge.style.color=RARITY_TEXT[animal.rarity]||'#92400e';
+  spawnConfetti();
+  document.getElementById('unlock-overlay').classList.add('active');
+}
+
+function closeUnlock(){document.getElementById('unlock-overlay').classList.remove('active');}
+
+function spawnConfetti(){
+  const c=document.getElementById('confetti-container');
+  c.innerHTML='';
+  const colors=['#d4a017','#2d6a4f','#52b788','#f472b6','#60a5fa','#fbbf24','#a78bfa'];
+  for(let i=0;i<60;i++){
+    const piece=document.createElement('div');
+    piece.className='confetti-piece';
+    piece.style.left=Math.random()*100+'%';
+    piece.style.background=colors[Math.floor(Math.random()*colors.length)];
+    piece.style.width=(Math.random()*10+6)+'px';
+    piece.style.height=(Math.random()*10+6)+'px';
+    piece.style.borderRadius=Math.random()>0.5?'50%':'2px';
+    piece.style.animationDuration=(Math.random()*2+1.5)+'s';
+    piece.style.animationDelay=(Math.random()*0.8)+'s';
+    c.appendChild(piece);
+  }
+}
+
+// ══════════════════════════════════════════
+// AUTH
+// ══════════════════════════════════════════
+let authMode='signup';
 function openAuth(mode){
-  authMode = mode;
+  authMode=mode;
   document.getElementById('auth-error').style.display='none';
-  document.getElementById('auth-title').textContent = mode==='signup'?'Bienvenue !':'Bon retour !';
-  document.getElementById('auth-sub').textContent = mode==='signup'?'Crée ton compte et reçois 5 FJ offerts':'Connecte-toi pour accéder à ta collection';
-  document.getElementById('name-field').style.display = mode==='signup'?'':'none';
-  document.getElementById('auth-submit-btn').textContent = mode==='signup'?"S'inscrire":'Se connecter';
-  document.getElementById('auth-switch').innerHTML = mode==='signup'?'Déjà un compte ? <a onclick="openAuth(\'login\')">Se connecter</a>':'Pas encore de compte ? <a onclick="openAuth(\'signup\')">S\'inscrire</a>';
+  document.getElementById('auth-title').textContent=mode==='signup'?'Bienvenue !':'Bon retour !';
+  document.getElementById('auth-sub').textContent=mode==='signup'?'Crée ton compte et reçois 5 FJ offerts':'Connecte-toi à ta collection';
+  document.getElementById('name-field').style.display=mode==='signup'?'':'none';
+  document.getElementById('auth-submit-btn').textContent=mode==='signup'?"S'inscrire":'Se connecter';
+  document.getElementById('auth-switch').innerHTML=mode==='signup'?'Déjà un compte ? <a onclick="openAuth(\'login\')">Se connecter</a>':'Pas encore de compte ? <a onclick="openAuth(\'signup\')">S\'inscrire</a>';
   document.getElementById('auth-modal').classList.add('open');
 }
 
-function closeAuthModal(e){ if(e.target.id==='auth-modal') document.getElementById('auth-modal').classList.remove('open'); }
-
 async function submitAuth(){
-  const email = document.getElementById('inp-email').value.trim();
-  const password = document.getElementById('inp-password').value;
-  const name = document.getElementById('inp-name').value.trim();
-  const errEl = document.getElementById('auth-error');
+  const email=document.getElementById('inp-email').value.trim();
+  const password=document.getElementById('inp-password').value;
+  const name=document.getElementById('inp-name').value.trim();
+  const errEl=document.getElementById('auth-error');
   errEl.style.display='none';
-  if(!email||!password){ errEl.textContent='Email et mot de passe requis.'; errEl.style.display='block'; return; }
-  if(authMode==='signup'&&!name){ errEl.textContent='Choisis un pseudo.'; errEl.style.display='block'; return; }
-  const btn = document.getElementById('auth-submit-btn');
-  btn.innerHTML='<span class="spinner"></span>Chargement...'; btn.disabled=true;
+  if(!email||!password){errEl.textContent='Email et mot de passe requis.';errEl.style.display='block';return;}
+  const btn=document.getElementById('auth-submit-btn');
+  btn.innerHTML='<span class="spinner"></span>';btn.disabled=true;
   try{
-    const endpoint = authMode==='signup'?'/register':'/login';
-    const body = authMode==='signup'?{email,password,name}:{email,password};
-    const r = await fetch(API+endpoint, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    const d = await r.json();
-    if(!r.ok){ errEl.textContent=d.error||'Erreur'; errEl.style.display='block'; btn.textContent=authMode==='signup'?"S'inscrire":'Se connecter'; btn.disabled=false; return; }
-    localStorage.setItem('faunaToken', d.token);
-    state.user=d.user; state.balance=d.balance; state.owned=new Set(d.owned);
-    updateUI(); renderAll();
+    const endpoint=authMode==='signup'?'/api/register':'/api/login';
+    const body=authMode==='signup'?{email,password,name}:{email,password};
+    const r=await fetch(API+endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const d=await r.json();
+    if(!r.ok){errEl.textContent=d.error||'Erreur';errEl.style.display='block';btn.textContent=authMode==='signup'?"S'inscrire":'Se connecter';btn.disabled=false;return;}
+    localStorage.setItem('faunaToken',d.token);
+    state.user=d.user;state.balance=d.balance;state.owned=new Set(d.owned);
+    updateUI();renderAll();
     document.getElementById('auth-modal').classList.remove('open');
-    showToast(authMode==='signup'?'🎉 Bienvenue ! 5 FJ offerts !':'👋 Bon retour !');
+    if(authMode==='signup'){
+      setTimeout(()=>showUnlockAnimation(ANIMALS[0],'Bienvenue !','Le pigeon voyageur est ton premier animal !'),400);
+    } else {showToast('👋 Bon retour !');}
   }catch(e){
-    // DEMO MODE
+    // MODE DEMO
     state.user={name:name||'Toi',email};
-    state.balance = authMode==='signup'?5.00:state.balance||5.00;
-    if(authMode==='signup') state.owned=new Set(['pigeon']);
+    state.balance=authMode==='signup'?5.00:state.balance||5.00;
+    if(authMode==='signup')state.owned=new Set(['pigeon']);
     localStorage.setItem('faunaToken','demo-token');
-    updateUI(); renderAll();
+    updateUI();renderAll();
     document.getElementById('auth-modal').classList.remove('open');
-    showToast(authMode==='signup'?'🎉 Mode démo — 5 FJ offerts !':'👋 Bon retour (mode démo) !');
+    if(authMode==='signup'){
+      setTimeout(()=>showUnlockAnimation(ANIMALS[0],'Bienvenue !','Le pigeon voyageur est ton premier animal !'),400);
+    } else {showToast('👋 Mode démo actif !');}
   }
-  btn.textContent=authMode==='signup'?"S'inscrire":'Se connecter'; btn.disabled=false;
+  btn.textContent=authMode==='signup'?"S'inscrire":'Se connecter';btn.disabled=false;
 }
 
 function logout(){
   localStorage.removeItem('faunaToken');
-  state.user=null; state.balance=0; state.owned=new Set();
-  updateUI(); renderAll(); showToast('Au revoir !');
+  state.user=null;state.balance=0;state.owned=new Set();
+  updateUI();renderAll();showToast('Au revoir !');
 }
 
-// --- WALLET ---
-function showWalletInfo(){
+// ══════════════════════════════════════════
+// WALLET
+// ══════════════════════════════════════════
+function showWalletModal(){
   document.getElementById('wallet-big-balance').textContent=state.balance.toFixed(2)+' FJ';
   document.getElementById('wallet-modal').classList.add('open');
 }
-function closeWalletModal(e){ if(e.target.id==='wallet-modal') document.getElementById('wallet-modal').classList.remove('open'); }
 
 async function topUpWallet(){
-  const amt = parseFloat(document.getElementById('topup-amount').value);
-  if(!amt||amt<1||amt>100){ showToast('Montant entre 1 et 100 €'); return; }
+  const amt=parseFloat(document.getElementById('topup-amount').value);
+  if(!amt||amt<1||amt>100){showToast('Montant entre 1 et 100 €');return;}
   try{
-    const r = await fetch(API+'/topup', {method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('faunaToken')},body:JSON.stringify({amount:Math.round(amt*100)})});
-    const d = await r.json();
-    if(!state.stripe) state.stripe = Stripe(STRIPE_PK);
-    const {error} = await state.stripe.redirectToCheckout({sessionId:d.sessionId});
-    if(error) showToast('Erreur: '+error.message);
-  }catch(e){ showToast('⚠️ Configure le backend Stripe pour activer les rechargements.'); }
+    const r=await fetch(API+'/api/topup',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+localStorage.getItem('faunaToken')},body:JSON.stringify({amount:Math.round(amt*100)})});
+    const d=await r.json();
+    if(!state.stripe)state.stripe=Stripe(STRIPE_PK);
+    const {error}=await state.stripe.redirectToCheckout({sessionId:d.sessionId});
+    if(error)showToast('Erreur: '+error.message);
+  }catch(e){showToast('⚠️ Configure le backend Stripe pour les rechargements.');}
 }
 
-// --- AI ---
+// ══════════════════════════════════════════
+// IA
+// ══════════════════════════════════════════
 async function loadDailyTip(){
-  const el = document.getElementById('ai-daily-text');
-  el.textContent='Le gardien réfléchit...';
+  const el=document.getElementById('ai-daily-text');
+  el.textContent='Le gardien observe la forêt...';
   try{
-    const r = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:'Tu es le gardien mystérieux de Fauna Rara, un jeu de collection d\'animaux rares. Donne un conseil du jour poétique et mystérieux en 2-3 phrases pour motiver les collectionneurs. Parle de la nature, de la rareté, de la magie des animaux sauvages.'}]})});
-    const d = await r.json();
-    el.textContent = d.content?.map(b=>b.text||'').join('')||'La forêt garde ses secrets...';
-  }catch(e){ el.textContent='Chaque animal rare est une fenêtre sur un monde que peu ont vu. Aujourd\'hui, le destin t\'en réserve peut-être un... 🌿'; }
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:'Tu es le gardien mystérieux de Fauna Rara. Donne un conseil du jour poétique en 2 phrases max pour motiver les collectionneurs. Parle de la nature et de la rareté des animaux sauvages.'}]})});
+    const d=await r.json();
+    el.textContent=d.content?.map(b=>b.text||'').join('')||'La forêt garde ses secrets...';
+  }catch(e){el.textContent="Chaque animal rare est une fenêtre sur un monde que peu ont vu. Aujourd'hui, le destin t'en réserve peut-être un... 🌿";}
 }
 
 async function getAnimalAI(a){
-  const el = document.getElementById('m-ai');
+  const el=document.getElementById('m-ai');
   el.textContent='Analyse en cours...';
   try{
-    const r = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`Tu es le gardien de Fauna Rara. Donne une analyse fascinante de "${a.name}" (rareté: ${a.rarity}, €${a.price}) en 2-3 phrases. Mentionne un fait surprenant sur cet animal et pourquoi il vaut le détour. Style poétique mais informatif.`}]})});
-    const d = await r.json();
-    el.textContent = d.content?.map(b=>b.text||'').join('')||'Un animal extraordinaire qui mérite une place dans ta collection.';
-  }catch(e){ el.textContent=a.desc+' Un specimen que peu de collectionneurs possèdent.'; }
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:`Tu es le gardien de Fauna Rara. Donne une analyse fascinante de "${a.name}" (rareté: ${a.rarity}, €${a.price}) en 2 phrases max. Un fait surprenant + pourquoi il vaut le détour. Style poétique.`}]})});
+    const d=await r.json();
+    el.textContent=d.content?.map(b=>b.text||'').join('')||a.desc;
+  }catch(e){el.textContent=a.desc;}
 }
 
-// --- UTILS ---
-function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3000); }
-function scrollToShop(){ document.getElementById('main-shop').scrollIntoView({behavior:'smooth'}); }
+// ══════════════════════════════════════════
+// UTILS
+// ══════════════════════════════════════════
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
 
 init();
 </script>
